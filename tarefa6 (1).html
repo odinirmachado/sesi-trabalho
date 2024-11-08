@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gerenciamento de Tarefas</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+    .column {
+      display: inline-block;
+      width: 30%;
+      margin: 0 10px;
+      vertical-align: top;
+    }
+    .task-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    .task-details {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Gerenciamento de Tarefas</h2>
+
+    <div class="column">
+      <h3>A Fazer</h3>
+      <div id="todoTasks">
+        <!-- Exemplo de tarefas no status "A Fazer" -->
+        <div class="task-card">
+          <div class="task-details">
+            <strong>Descrição:</strong> Revisar documento do projeto<br>
+            <strong>Setor:</strong> Administrativo<br>
+            <strong>Prioridade:</strong> Alta<br>
+            <strong>Usuário:</strong> João Silva<br>
+          </div>
+          <button>Editar</button>
+          <button>Excluir</button>
+          <select>
+            <option value="a_fazer" selected>A Fazer</option>
+            <option value="fazendo">Fazendo</option>
+            <option value="pronto">Pronto</option>
+          </select>
+          <button>Alterar Status</button>
+        </div>
+        
+        <div class="task-card">
+          <div class="task-details">
+            <strong>Descrição:</strong> Criar layout da página inicial<br>
+            <strong>Setor:</strong> Design<br>
+            <strong>Prioridade:</strong> Média<br>
+            <strong>Usuário:</strong> Maria Oliveira<br>
+          </div>
+          <button>Editar</button>
+          <button>Excluir</button>
+          <select>
+            <option value="a_fazer" selected>A Fazer</option>
+            <option value="fazendo">Fazendo</option>
+            <option value="pronto">Pronto</option>
+          </select>
+          <button>Alterar Status</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <h3>Fazendo</h3>
+      <div id="doingTasks">
+        <!-- Exemplo de tarefas no status "Fazendo" -->
+        <div class="task-card">
+          <div class="task-details">
+            <strong>Descrição:</strong> Implementar funcionalidade de login<br>
+            <strong>Setor:</strong> Desenvolvimento<br>
+            <strong>Prioridade:</strong> Alta<br>
+            <strong>Usuário:</strong> Pedro Santos<br>
+          </div>
+          <button>Editar</button>
+          <button>Excluir</button>
+          <select>
+            <option value="a_fazer">A Fazer</option>
+            <option value="fazendo" selected>Fazendo</option>
+            <option value="pronto">Pronto</option>
+          </select>
+          <button>Alterar Status</button>
+        </div>
+        
+        <div class="task-card">
+          <div class="task-details">
+            <strong>Descrição:</strong> Revisar design da interface<br>
+            <strong>Setor:</strong> Design<br>
+            <strong>Prioridade:</strong> Média<br>
+            <strong>Usuário:</strong> Clara Pereira<br>
+          </div>
+          <button>Editar</button>
+          <button>Excluir</button>
+          <select>
+            <option value="a_fazer">A Fazer</option>
+            <option value="fazendo" selected>Fazendo</option>
+            <option value="pronto">Pronto</option>
+          </select>
+          <button>Alterar Status</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <h3>Pronto</h3>
+      <div id="doneTasks">
+        <!-- Exemplo de tarefas no status "Pronto" -->
+        <div class="task-card">
+          <div class="task-details">
+            <strong>Descrição:</strong> Documentação da API<br>
+            <strong>Setor:</strong> Desenvolvimento<br>
+            <strong>Prioridade:</strong> Baixa<br>
+            <strong>Usuário:</strong> Alice Fernandes<br>
+          </div>
+          <button>Editar</button>
+          <button>Excluir</button>
+          <select>
+            <option value="a_fazer">A Fazer</option>
+            <option value="fazendo">Fazendo</option>
+            <option value="pronto" selected>Pronto</option>
+          </select>
+          <button>Alterar Status</button>
+        </div>
+        
+        <div class="task-card">
+          <div class="task-details">
+            <strong>Descrição:</strong> Testes unitários<br>
+            <strong>Setor:</strong> Qualidade<br>
+            <strong>Prioridade:</strong> Alta<br>
+            <strong>Usuário:</strong> Roberto Lima<br>
+          </div>
+          <button>Editar</button>
+          <button>Excluir</button>
+          <select>
+            <option value="a_fazer">A Fazer</option>
+            <option value="fazendo">Fazendo</option>
+            <option value="pronto" selected>Pronto</option>
+          </select>
+          <button>Alterar Status</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
+  <script>
+    // Função para renderizar uma tarefa na tela
+    function renderTask(task) {
+      const taskCard = document.createElement('div');
+      taskCard.classList.add('task-card');
+
+      const taskDetails = document.createElement('div');
+      taskDetails.classList.add('task-details');
+      taskDetails.innerHTML = `
+        <strong>Descrição:</strong> ${task.description}<br>
+        <strong>Setor:</strong> ${task.sector}<br>
+        <strong>Prioridade:</strong> ${task.priority}<br>
+        <strong>Usuário:</strong> ${task.user}<br>
+      `;
+
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Editar';
+      editButton.addEventListener('click', () => {
+        // Redirecionar para a página de edição da tarefa
+        window.location.href = `/tasks/${task.id}/edit`; 
+      });
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Excluir';
+      deleteButton.addEventListener('click', () => {
+        // Mostrar modal de confirmação de exclusão
+        if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
+          // Chamar a função para excluir a tarefa do servidor
+          deleteTask(task.id);
+        }
+      });
+
+      const statusSelect = document.createElement('select');
+      statusSelect.innerHTML = `
+        <option value="a_fazer" ${task.status === 'a_fazer' ? 'selected' : ''}>A Fazer</option>
+        <option value="fazendo" ${task.status === 'fazendo' ? 'selected' : ''}>Fazendo</option>
+        <option value="pronto" ${task.status === 'pronto' ? 'selected' : ''}>Pronto</option>
+      `;
+
+      const changeStatusButton = document.createElement('button');
+      changeStatusButton.textContent = 'Alterar Status';
+      changeStatusButton.addEventListener('click', () => {
+        // Chamar a função para atualizar o status da tarefa no servidor
+        updateTaskStatus(task.id, statusSelect.value);
+      });
+
+      taskCard.appendChild(taskDetails);
+      taskCard.appendChild(editButton);
+      taskCard.appendChild(deleteButton);
+      taskCard.appendChild(statusSelect);
+      taskCard.appendChild(changeStatusButton);
+
+      return taskCard;
+    }
+
+    // Função para buscar tarefas do servidor
+    function fetchTasks() {
+      fetch('/tasks') // Substitua '/tasks' com seu endpoint real
+        .then(response => response.json())
+        .then(tasks => {
+          // Limpar as listas de tarefas antes de renderizar as novas
+          document.getElementById("todoTasks").innerHTML = '';
+          document.getElementById("doingTasks").innerHTML = '';
+          document.getElementById("doneTasks").innerHTML = '';
+
+          // Renderizar as tarefas em suas respectivas colunas
+          tasks.forEach(task => {
+            const taskCard = renderTask(task);
+            switch (task.status) {
+              case 'a_fazer':
+                document.getElementById("todoTasks").appendChild(taskCard);
+                break;
+              case 'fazendo':
+                document.getElementById("doingTasks").appendChild(taskCard);
+                break;
+              case 'pronto':
+                document.getElementById("doneTasks").appendChild(taskCard);
+                break;
+            }
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching tasks:', error);
+        });
+    }
+
+    // Função para excluir uma tarefa do servidor
+    function deleteTask(taskId) {
+      fetch(`/tasks/${taskId}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (response.ok) {
+          // Atualizar a lista de tarefas
+          fetchTasks();
+        } else {
+          // Handle error (e.g., display an error message)
+          console.error('Error deleting task:', response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting task:', error);
+      });
+    }
+
+    // Função para atualizar o status de uma tarefa no servidor
+    function updateTaskStatus(taskId, newStatus) {
+      fetch(`/tasks/${taskId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: newStatus })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Atualizar a lista de tarefas
+          fetchTasks();
+        } else {
+          // Handle error (e.g., display an error message)
+          console.error('Error updating task status:', response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Error updating task status:', error);
+      });
+    }
+
+    // Buscar as tarefas quando a página carregar
+    fetchTasks();
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gerenciamento de Tarefas</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .container {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"], input[type="email"], select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Cadastro de Tarefas</h2>
+
+    <form id="taskForm">
+      <label for="description">Descrição:</label>
+      <input type="text" id="description" name="description" required>
+
+      <label for="sector">Setor:</label>
+      <input type="text" id="sector" name="sector" required>
+
+      <label for="user">Usuário:</label>
+      <select id="user" name="user" required>
+        <!-- Populate this list from the database -->
+      </select>
+
+      <label for="priority">Prioridade:</label>
+      <select id="priority" name="priority" required>
+        <option value="baixa">Baixa</option>
+        <option value="media">Média</option>
+        <option value="alta">Alta</option>
+      </select>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <div id="successMessage" style="display:none;">
+      Cadastro concluído com sucesso!
+    </div>
+
+  </div>
+
+  <script>
+    // Submit the form
+    document.getElementById("taskForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Check if all fields are filled
+      if (
+        document.getElementById("description").value !== "" &&
+        document.getElementById("sector").value !== "" &&
+        document.getElementById("user").value !== "" &&
+        document.getElementById("priority").value !== ""
+      ) {
+        // Submit the form data to the server
+        // (use AJAX or other method)
+        // ...
+
+        // Show success message
+        document.getElementById("successMessage").style.display = "block";
+      } else {
+        // Display an error message to the user
+        alert("Por favor, preencha todos os campos.");
+      }
+    });
+  </script>
+</body>
+</html>
